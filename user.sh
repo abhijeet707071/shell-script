@@ -62,7 +62,7 @@ systemctl enable user &>> "$LOG_FILE"
 systemctl restart user &>> "$LOG_FILE"
 check_status "Service start"
 
-log_message "user installation completed successfully!"
+log_message "User installation completed successfully!"
 
 
 
