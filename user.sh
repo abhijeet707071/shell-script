@@ -37,7 +37,7 @@ check_status "App directory creation"
 
 
 log_message "Downloading application content..." | tee -a "$LOG_FILE"
-curl -L -s -o /tmp/catalogue.zip https://roboshop-artifacts.s3.amazonaws.com/user-v3.zip &>> "$LOG_FILE"
+curl -L -s -o /tmp/user.zip https://roboshop-artifacts.s3.amazonaws.com/user-v3.zip &>> "$LOG_FILE"
 check_status "App Content Download"
 
 
