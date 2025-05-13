@@ -20,7 +20,7 @@ log_message() {
 # Function to check status
 check_status() {
     if [ $? -eq 0 ]; then
-        log_message "SUCCESS: $1"
+        echo -e "\e[32mSUCCESS: $1\e[0m" | tee -a "$LOG_FILE"
     else
         echo -e "\e[31mFAILED: $1\e[0m" | tee -a "$LOG_FILE"
         exit 1
