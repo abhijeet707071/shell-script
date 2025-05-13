@@ -7,9 +7,9 @@ component="redis"
 
 # Install and Configure Redis
 log_message "Installing Redis..." | tee -a "$LOG_FILE"
-dnf module disable redis -y
-dnf module enable redis:7 -y
-dnf install redis bash-completion -y
+dnf module disable redis -y &>> "$LOG_FILE"
+dnf module enable redis:7 -y &>> "$LOG_FILE"
+dnf install redis bash-completion -y &>> "$LOG_FILE"
 check_status "Redis installation"
 
 
