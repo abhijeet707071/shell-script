@@ -13,3 +13,9 @@ Shell Scripting Code
 - **AMI ID**: ami-0b4f379183e5706b9
 - **Username**: centos
 - **Password**: DevOps321
+
+# Color codes
+GREEN='\e[32m'
+YELLOW='\e[33m'
+RED='\e[31m'
+RESET='\e[0m'

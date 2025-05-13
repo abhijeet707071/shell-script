@@ -1,32 +1,8 @@
+# Frontend Installation and Configuration Script
 source ./common.sh
 
-# Color codes
-GREEN='\e[32m'
-YELLOW='\e[33m'
-RED='\e[31m'
-RESET='\e[0m'
-
-# Frontend Installation and Configuration Script
 LOG_FILE="/tmp/roboshop.log"
 component="frontend"
-
-# Set error handling
-#set -e
-
-## Function to log messages
-#log_message() {
-#    echo -e "\e[33m$1\e[0m" | tee -a "$LOG_FILE"
-#}
-#
-## Function to check status
-#check_status() {
-#    if [ $? -eq 0 ]; then
-#        echo -e "\e[32mSUCCESS: $1\e[0m" | tee -a "$LOG_FILE"
-#    else
-#        echo -e "\e[31mFAILED: $1\e[0m" | tee -a "$LOG_FILE"
-#        exit 1
-#    fi
-#}
 
 # Clear log file
 > "$LOG_FILE"

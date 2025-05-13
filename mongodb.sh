@@ -1,5 +1,6 @@
 # MongoDB Installation and Configuration Script
 source ./common.sh
+
 LOG_FILE="/tmp/roboshop.log"
 component="mongodb"
 
@@ -28,3 +29,5 @@ log_message "Restarting MongoDB service..." | tee -a "$LOG_FILE"
 systemctl enable mongod &>> "$LOG_FILE"
 systemctl restart mongod &>> "$LOG_FILE"
 check_status "MongoDB service restart"
+
+log_message "MongoDB installation completed successfully!"
