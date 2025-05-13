@@ -1,5 +1,11 @@
 #!/bin/bash
 
+# Color codes
+GREEN='\e[32m'
+YELLOW='\e[33m'
+RED='\e[31m'
+RESET='\e[0m'
+
 # Frontend Installation and Configuration Script
 LOG_FILE="/tmp/roboshop.log"
 
