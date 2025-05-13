@@ -1,6 +1,6 @@
 # Function to log messages
 log_message() {
-    echo -e "\e[33m$1\e[0m" | tee -a "$LOG_FILE"
+    echo -e "\e[1;33m$1\e[0m" | tee -a "$LOG_FILE"
 }
 
 # Function to check status
