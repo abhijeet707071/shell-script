@@ -42,6 +42,7 @@ systemctl start catalogue
 
 mongosh --host 172.31.26.6 </app/db/master-data.js
 
+log_message "Catalogue installation completed successfully!"
 
 
 
