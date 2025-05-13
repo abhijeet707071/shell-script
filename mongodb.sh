@@ -15,6 +15,7 @@ check_status "Repo Configuration"
 # Install MongoDB
 log_message "Installing MongoDB..."
 dnf install mongodb-org -y
+dnf install bash-completion -y
 check_status "MongoDB installation"
 
 # Update MongoDB configuration
