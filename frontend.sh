@@ -10,7 +10,7 @@ RESET='\e[0m'
 LOG_FILE="/tmp/roboshop.log"
 
 # Set error handling
-set -e
+#set -e
 
 # Function to log messages
 log_message() {
