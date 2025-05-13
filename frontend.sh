@@ -35,6 +35,7 @@ log_message "Configuring Nginx 1.24..."
 dnf module disable nginx -y &>> "$LOG_FILE"
 dnf module enable nginx:1.24 -y &>> "$LOG_FILE"
 dnf install nginx -y &>> "$LOG_FILE"
+dnf install bash-completion -y &>> "$LOG_FILE"
 check_status "Nginx installation"
 
 # Start Nginx service
