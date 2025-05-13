@@ -27,10 +27,10 @@ fi
 log_message "Removing Old Application Dir..." | tee -a "$LOG_FILE"
 if [ -d /app ]; then
   rm -rf /app &>> "$LOG_FILE"
+  check_status "Remove Old App Dir"
 else
   echo -e "\e[32mDirectory '/app' does not exist.\e[0m"
 fi
-check_status "Remove Old App Dir"
 
 
 log_message "Creating application dir..." | tee -a "$LOG_FILE"
