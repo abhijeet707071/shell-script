@@ -5,13 +5,16 @@ print_start_banner() {
   local script_name=$(basename "$0")
   local width=60
   local padding=$(( (width - ${#script_name} - 18) / 2 ))
+  local line=$(printf '%*s' "$width" | tr ' ' '━')
+  local space=$(printf '%*s' "$width")
+  local pad_space=$(printf '%*s' "$padding")
 
   echo
-  echo -e "\e[1;34m┏$("printf '━%.0s' {1..$width}")┓\e[0m"
-  echo -e "\e[1;34m┃$("printf ' %.0s' {1..$width}")┃\e[0m"
-  echo -e "\e[1;34m┃$("printf ' %.0s' {1..$padding}")\e[1;97m🚀 STARTING: $script_name 🚀\e[1;34m$("printf ' %.0s' {1..$padding}")┃\e[0m"
-  echo -e "\e[1;34m┃$("printf ' %.0s' {1..$width}")┃\e[0m"
-  echo -e "\e[1;34m┗$("printf '━%.0s' {1..$width}")┛\e[0m"
+  echo -e "\e[1;34m┏${line}┓\e[0m"
+  echo -e "\e[1;34m┃${space}┃\e[0m"
+  echo -e "\e[1;34m┃${pad_space}\e[1;97m🚀 STARTING: $script_name 🚀\e[1;34m${pad_space}┃\e[0m"
+  echo -e "\e[1;34m┃${space}┃\e[0m"
+  echo -e "\e[1;34m┗${line}┛\e[0m"
   echo
 }
 
@@ -20,13 +23,16 @@ print_end_banner() {
   local script_name=$(basename "$0")
   local width=60
   local padding=$(( (width - ${#script_name} - 18) / 2 ))
+  local line=$(printf '%*s' "$width" | tr ' ' '━')
+  local space=$(printf '%*s' "$width")
+  local pad_space=$(printf '%*s' "$padding")
 
   echo
-  echo -e "\e[1;32m┏$("printf '━%.0s' {1..$width}")┓\e[0m"
-  echo -e "\e[1;32m┃$("printf ' %.0s' {1..$width}")┃\e[0m"
-  echo -e "\e[1;32m┃$("printf ' %.0s' {1..$padding}")\e[1;97m✅ COMPLETED: $script_name ✅\e[1;32m$("printf ' %.0s' {1..$padding}")┃\e[0m"
-  echo -e "\e[1;32m┃$("printf ' %.0s' {1..$width}")┃\e[0m"
-  echo -e "\e[1;32m┗$("printf '━%.0s' {1..$width}")┛\e[0m"
+  echo -e "\e[1;32m┏${line}┓\e[0m"
+  echo -e "\e[1;32m┃${space}┃\e[0m"
+  echo -e "\e[1;32m┃${pad_space}\e[1;97m✅ COMPLETED: $script_name ✅\e[1;32m${pad_space}┃\e[0m"
+  echo -e "\e[1;32m┃${space}┃\e[0m"
+  echo -e "\e[1;32m┗${line}┛\e[0m"
   echo
 }
 
@@ -35,12 +41,15 @@ print_error_banner() {
   local script_name=$(basename "$0")
   local width=60
   local padding=$(( (width - ${#script_name} - 16) / 2 ))
+  local line=$(printf '%*s' "$width" | tr ' ' '━')
+  local space=$(printf '%*s' "$width")
+  local pad_space=$(printf '%*s' "$padding")
 
   echo
-  echo -e "\e[1;31m┏$("printf '━%.0s' {1..$width}")┓\e[0m"
-  echo -e "\e[1;31m┃$("printf ' %.0s' {1..$width}")┃\e[0m"
-  echo -e "\e[1;31m┃$("printf ' %.0s' {1..$padding}")\e[1;97m❌ FAILED: $script_name ❌\e[1;31m$("printf ' %.0s' {1..$padding}")┃\e[0m"
-  echo -e "\e[1;31m┃$("printf ' %.0s' {1..$width}")┃\e[0m"
-  echo -e "\e[1;31m┗$("printf '━%.0s' {1..$width}")┛\e[0m"
+  echo -e "\e[1;31m┏${line}┓\e[0m"
+  echo -e "\e[1;31m┃${space}┃\e[0m"
+  echo -e "\e[1;31m┃${pad_space}\e[1;97m❌ FAILED: $script_name ❌\e[1;31m${pad_space}┃\e[0m"
+  echo -e "\e[1;31m┃${space}┃\e[0m"
+  echo -e "\e[1;31m┗${line}┛\e[0m"
   echo
 }
