@@ -4,7 +4,7 @@
 print_start_banner() {
   local script_name=$(basename "$0")
   local width=80
-  local padding=$(( (width - ${#script_name} - 12) / 2 ))
+  local padding=$(( (width - ${#script_name} - 18) / 2 ))
   local line=$(printf '%*s' "$width" | tr ' ' '━')
   local space=$(printf '%*s' "$width")
   local pad_space=$(printf '%*s' "$padding")
