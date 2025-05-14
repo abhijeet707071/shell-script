@@ -5,7 +5,7 @@ component="mysql"
 > "$LOG_FILE"
 
 if [ -z "$1" ]; then
-  echo "Please provide the MySQL root password as an 1st argument."
+  echo -e "\n\e[1;31mPlease provide the MySQL root password as an 1st argument.\e[0m"
   exit 1
 fi
 
