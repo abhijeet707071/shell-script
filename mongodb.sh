@@ -1,6 +1,5 @@
 # MongoDB Installation and Configuration Script
 source ./common.sh
-
 LOG_FILE="/tmp/roboshop.log"
 component="mongodb"
 
@@ -9,6 +8,9 @@ component="mongodb"
 
 # Display the end banner
 print_end_banner
+
+# Set hostname
+hostname
 
 # Install and Configure Nginx
 log_message "Configuring MongoDB repository..." | tee -a "$LOG_FILE"

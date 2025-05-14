@@ -8,6 +8,9 @@ component="redis"
 # Display the start banner
 print_start_banner
 
+# Set hostname
+hostname
+
 # Install and Configure Redis
 log_message "Installing Redis..." | tee -a "$LOG_FILE"
 dnf module disable redis -y &>> "$LOG_FILE"

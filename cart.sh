@@ -1,6 +1,5 @@
 # cart Installation and Configuration Script
 source ./common.sh
-
 LOG_FILE="/tmp/${component}.log"
 component="cart"
 
@@ -9,6 +8,9 @@ component="cart"
 
 # Display the start banner
 print_start_banner
+
+# Set hostname
+hostname
 
 # Install and NodeJS.
 log_message "Installing NodeJS 20..." | tee -a "$LOG_FILE"

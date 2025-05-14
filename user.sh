@@ -8,6 +8,9 @@ component="user"
 # Display the start banner
 print_start_banner
 
+# Set hostname
+hostname
+
 # Install and NodeJS.
 log_message "Installing NodeJS 20..." | tee -a "$LOG_FILE"
 dnf module disable nodejs -y &>> "$LOG_FILE"

@@ -13,10 +13,11 @@ if [ -z "$1" ]; then
   exit 1
 fi
 
-hostnamectl set-hostname ${component}
+# Set hostname
+hostname
 
 # Install and Maven
-dnf install maven -y
+dnf install maven bash-completion -y
 
 # Create application user
 if id roboshop &>/dev/null;then
@@ -61,3 +62,6 @@ mysql -h mysql.learntechnology.space -uroot -p"$1" < /app/db/app-user.sql
 mysql -h mysql.learntechnology.space -uroot -p"$1" < /app/db/master-data.sql
 
 systemctl restart shipping
+
+# Display the end banner
+print_end_banner

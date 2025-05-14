@@ -1,6 +1,5 @@
 # Frontend Installation and Configuration Script
 source ./common.sh
-
 LOG_FILE="/tmp/roboshop.log"
 component="frontend"
 
@@ -9,6 +8,9 @@ component="frontend"
 
 # Display the start banner
 print_start_banner
+
+# Set hostname
+hostname
 
 # Install and Configure Nginx
 log_message "Configuring Nginx 1.24..."

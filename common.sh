@@ -15,3 +15,10 @@ check_status() {
         exit 1
     fi
 }
+
+hostname(){
+  log_message "Set hostname..." | tee -a "$LOG_FILE"
+  hostnamectl set-hostname ${component} &>> "$LOG_FILE"
+  dnf install bash-completion -y &>> "$LOG_FILE"
+  check_status "Set hostname"
+}

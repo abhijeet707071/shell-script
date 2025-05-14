@@ -12,9 +12,12 @@ if [ -z "$1" ]; then
   exit 1
 fi
 
+# Set hostname
+hostname
+
 # Install MySQL
 log_message "Installing Mysql server..." | tee -a "$LOG_FILE"
-dnf install mysql-server -y &>> "$LOG_FILE"
+dnf install mysql-server bash-completion -y &>> "$LOG_FILE"
 check_status "Mysql installation"
 
 
