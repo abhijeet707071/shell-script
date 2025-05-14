@@ -4,6 +4,9 @@ component="mysql"
 # Clear log file
 > "$LOG_FILE"
 
+# Display the start banner
+print_start_banner
+
 if [ -z "$1" ]; then
   echo -e "\n\e[1;31mPlease provide the MySQL root password as an 1st argument.\e[0m"
   exit 1
@@ -24,3 +27,6 @@ check_status "Mysql service start"
 log_message "Configure the root password..." | tee -a "$LOG_FILE"
 mysql_secure_installation --set-root-pass "$1" &>> "$LOG_FILE"
 check_status "Mysql root password set"
+
+# Display the end banner
+print_end_banner
