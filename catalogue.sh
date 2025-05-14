@@ -68,7 +68,7 @@ check_status "Service start"
 log_message "Load the schema..." | tee -a "$LOG_FILE"
 cp mongo.repo /etc/yum.repos.d/mongo.repo &>> "$LOG_FILE"
 dnf install mongodb-mongosh -y &>> "$LOG_FILE"
-mongosh --host 172.31.26.6 </app/db/master-data.js &>> "$LOG_FILE"
+mongosh --host mongodb.learntechnology.space </app/db/master-data.js &>> "$LOG_FILE"
 check_status "Schema Load"
 
 log_message "Catalogue installation completed successfully!"
