@@ -5,6 +5,9 @@ component="redis"
 # Clear log file
 > "$LOG_FILE"
 
+# Display the start banner
+print_start_banner
+
 # Install and Configure Redis
 log_message "Installing Redis..." | tee -a "$LOG_FILE"
 dnf module disable redis -y &>> "$LOG_FILE"
@@ -23,3 +26,6 @@ log_message "Starting Redis service..." | tee -a "$LOG_FILE"
 systemctl enable redis &>> "$LOG_FILE"
 systemctl restart redis &>> "$LOG_FILE"
 check_status "Redis service startup"
+
+# Display the end banner
+print_end_banner

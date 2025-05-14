@@ -4,9 +4,11 @@ source ./common.sh
 LOG_FILE="/tmp/roboshop.log"
 component="mongodb"
 
-
 # Clear log file
 > "$LOG_FILE"
+
+# Display the end banner
+print_end_banner
 
 # Install and Configure Nginx
 log_message "Configuring MongoDB repository..." | tee -a "$LOG_FILE"
@@ -30,4 +32,5 @@ systemctl enable mongod &>> "$LOG_FILE"
 systemctl restart mongod &>> "$LOG_FILE"
 check_status "MongoDB service restart"
 
-log_message "MongoDB installation completed successfully!"
+# Display the end banner
+print_end_banner

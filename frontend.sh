@@ -7,6 +7,9 @@ component="frontend"
 # Clear log file
 > "$LOG_FILE"
 
+# Display the start banner
+print_start_banner
+
 # Install and Configure Nginx
 log_message "Configuring Nginx 1.24..."
 dnf module disable nginx -y &>> "$LOG_FILE"
@@ -49,4 +52,5 @@ check_status "Nginx restart"
 # Cleanup
 rm -f /tmp/frontend.zip
 
-log_message "Frontend installation completed successfully!"
+# Display the end banner
+print_end_banner

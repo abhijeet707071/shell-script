@@ -7,6 +7,9 @@ component="catalogue"
 # Clear log file
 > "$LOG_FILE"
 
+# Display the start banner
+print_start_banner
+
 # Install and NodeJS.
 log_message "Installing NodeJS 20..." | tee -a "$LOG_FILE"
 dnf module disable nodejs -y &>> "$LOG_FILE"
@@ -71,7 +74,8 @@ dnf install mongodb-mongosh -y &>> "$LOG_FILE"
 mongosh --host mongodb.learntechnology.space </app/db/master-data.js &>> "$LOG_FILE"
 check_status "Schema Load"
 
-log_message "Catalogue installation completed successfully!"
+# Display the end banner
+print_end_banner
 
 
 

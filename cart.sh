@@ -7,6 +7,9 @@ component="cart"
 # Clear log file
 > "$LOG_FILE"
 
+# Display the start banner
+print_start_banner
+
 # Install and NodeJS.
 log_message "Installing NodeJS 20..." | tee -a "$LOG_FILE"
 dnf module disable nodejs -y &>> "$LOG_FILE"
@@ -64,8 +67,8 @@ systemctl enable cart &>> "$LOG_FILE"
 systemctl restart cart &>> "$LOG_FILE"
 check_status "Service start"
 
-
-log_message "Cart installation completed successfully!"
+# Display the end banner
+print_end_banner
 
 
 
