@@ -13,6 +13,8 @@ if [ -z "$1" ]; then
   exit 1
 fi
 
+hostnamectl set-hostname ${component}
+
 # Install and Maven
 dnf install maven -y
 
