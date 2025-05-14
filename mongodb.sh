@@ -6,8 +6,8 @@ component="mongodb"
 # Clear log file
 > "$LOG_FILE"
 
-# Display the end banner
-print_end_banner
+# Display the start banner
+print_start_banner
 
 # Set hostname
 hostname
