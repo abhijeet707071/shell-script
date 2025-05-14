@@ -17,7 +17,7 @@ fi
 hostname
 
 # Install and Maven
-dnf install maven bash-completion -y
+dnf install maven bash-completion -y &>> "$LOG_FILE"
 
 # Create application user
 if id roboshop &>/dev/null;then
@@ -36,32 +36,32 @@ else
 fi
 
 # Create application directory
-mkdir /app
+mkdir /app &>> "$LOG_FILE"
 
 # Download and extract shipping content
-curl -L -o /tmp/shipping.zip https://roboshop-artifacts.s3.amazonaws.com/shipping-v3.zip
-unzip -o /tmp/shipping.zip -d /app
+curl -L -o /tmp/shipping.zip https://roboshop-artifacts.s3.amazonaws.com/shipping-v3.zip &>> "$LOG_FILE"
+unzip -o /tmp/shipping.zip -d /app &>> "$LOG_FILE"
 
 # Install application dependency and create the artifact.
-mvn clean package -f /app/pom.xml
-mv /app/target/shipping-1.0.jar /app/shipping.jar
+mvn clean package -f /app/pom.xml &>> "$LOG_FILE"
+mv /app/target/shipping-1.0.jar /app/shipping.jar &>> "$LOG_FILE"
 
 # Create application service file
-cp shipping.service /etc/systemd/system/shipping.service
+cp shipping.service /etc/systemd/system/shipping.service &>> "$LOG_FILE"
 
 # Update the systemd daemon
-systemctl daemon-reload
+systemctl daemon-reload &>> "$LOG_FILE"
 # Start the application
-systemctl enable shipping
-systemctl restart shipping
+systemctl enable shipping &>> "$LOG_FILE"
+systemctl restart shipping &>> "$LOG_FILE"
 
 # Load the schema
 dnf install mysql -y
-mysql -h mysql.learntechnology.space -uroot -p"$1" < /app/db/schema.sql
-mysql -h mysql.learntechnology.space -uroot -p"$1" < /app/db/app-user.sql
-mysql -h mysql.learntechnology.space -uroot -p"$1" < /app/db/master-data.sql
+mysql -h mysql.learntechnology.space -uroot -p"$1" < /app/db/schema.sql &>> "$LOG_FILE"
+mysql -h mysql.learntechnology.space -uroot -p"$1" < /app/db/app-user.sql &>> "$LOG_FILE"
+mysql -h mysql.learntechnology.space -uroot -p"$1" < /app/db/master-data.sql &>> "$LOG_FILE"
 
-systemctl restart shipping
+systemctl restart shipping &>> "$LOG_FILE"
 
 # Display the end banner
 print_end_banner
