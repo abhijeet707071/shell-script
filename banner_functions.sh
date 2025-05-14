@@ -3,8 +3,8 @@
 # Function to display a stylish start banner
 print_start_banner() {
   local script_name=$(basename "$0")
-  local width=40
-  local padding=$(( (width - ${#script_name} - 18) / 2 ))
+  local width=80
+  local padding=$(( (width - ${#script_name} - 12) / 2 ))
   local line=$(printf '%*s' "$width" | tr ' ' '━')
   local space=$(printf '%*s' "$width")
   local pad_space=$(printf '%*s' "$padding")
@@ -21,8 +21,8 @@ print_start_banner() {
 # Function to display a stylish end banner for success
 print_end_banner() {
   local script_name=$(basename "$0")
-  local width=40
-  local padding=$(( (width - ${#script_name} - 18) / 2 ))
+  local width=80
+  local padding=$(( (width - ${#script_name} - 12) / 2 ))
   local line=$(printf '%*s' "$width" | tr ' ' '━')
   local space=$(printf '%*s' "$width")
   local pad_space=$(printf '%*s' "$padding")
@@ -39,8 +39,8 @@ print_end_banner() {
 # Function to display a stylish end banner for failure
 print_error_banner() {
   local script_name=$(basename "$0")
-  local width=40
-  local padding=$(( (width - ${#script_name} - 16) / 2 ))
+  local width=80
+  local padding=$(( (width - ${#script_name} - 10) / 2 ))
   local line=$(printf '%*s' "$width" | tr ' ' '━')
   local space=$(printf '%*s' "$width")
   local pad_space=$(printf '%*s' "$padding")
