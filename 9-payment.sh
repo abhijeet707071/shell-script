@@ -18,7 +18,10 @@ print_start_banner
 # Set hostname
 hostname
 
+log_message "Install Python..." | tee -a "$LOG_FILE"
 dnf install python3 gcc python3-devel -y
+check_status "Python installation"
+
 
 # Create application user
 log_message "Creating application user..." | tee -a "$LOG_FILE"
@@ -43,20 +46,33 @@ log_message "Creating application dir..." | tee -a "$LOG_FILE"
 mkdir /app &>> "$LOG_FILE"
 check_status "App directory creation"
 
-
+log_message "Download and Extract the Application content..." | tee -a "$LOG_FILE"
 curl -L -s -o /tmp/payment.zip https://roboshop-artifacts.s3.amazonaws.com/payment-v3.zip &>> "$LOG_FILE"
 unzip -o /tmp/payment.zip -d /app &>> "$LOG_FILE"
+check_status "App Content Download"
 
 
+log_message "Build the Application..." | tee -a "$LOG_FILE"
 pip3 install -r /app/requirements.txt
+check_status "App Dependency Installation"
 
+
+log_message "Creating service file..." | tee -a "$LOG_FILE"
 cp service-files/payment.service /etc/systemd/system/payment.service
+check_status "Service file creation"
 
+
+log_message "Update the service file..." | tee -a "$LOG_FILE"
 sed -i 's/rabbitmq_user/${rabbitmq_user}/' /etc/systemd/system/payment.service
 sed -i 's/rabbitmq_user_pass/${rabbitmq_user_pass}/' /etc/systemd/system/payment.service
+check_status "Service file update"
+
 
 log_message "Start the Application ..." | tee -a "$LOG_FILE"
 systemctl daemon-reload &>> "$LOG_FILE"
 systemctl enable payment &>> "$LOG_FILE"
 systemctl restart payment &>> "$LOG_FILE"
 check_status "Service start"
+
+# Display the end banner
+print_end_banner
