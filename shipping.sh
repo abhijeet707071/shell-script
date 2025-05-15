@@ -16,52 +16,58 @@ fi
 # Set hostname
 hostname
 
-# Install and Maven
-dnf install maven bash-completion -y &>> "$LOG_FILE"
+log_message "Install Maven..." | tee -a "$LOG_FILE"
+dnf install maven -y &>> "$LOG_FILE"
+check_status "Maven installation"
 
-# Create application user
+log_message "Create application user..." | tee -a "$LOG_FILE"
 if id roboshop &>/dev/null;then
   echo -e "\e[32mUser 'roboshop' already exists.\e[0m"
 else
   useradd -m roboshop &>> "$LOG_FILE"
   check_status "User creation"
 fi
+check_status "User creation"
 
-# Remove old application directory
+log_message "Remove old application dir..." | tee -a "$LOG_FILE"
 if [ -d /app ]; then
   rm -rf /app &>> "$LOG_FILE"
   check_status "Remove Old App Dir"
 else
   echo -e "\e[32mDirectory '/app' does not exist.\e[0m"
 fi
+check_status "Remove Old App Dir"
 
-# Create application directory
+log_message "Creating application dir..." | tee -a "$LOG_FILE"
 mkdir /app &>> "$LOG_FILE"
+check_status "App directory creation"
 
-# Download and extract shipping content
+log_message "Extracting application content..." | tee -a "$LOG_FILE"
 curl -L -o /tmp/shipping.zip https://roboshop-artifacts.s3.amazonaws.com/shipping-v3.zip &>> "$LOG_FILE"
 unzip -o /tmp/shipping.zip -d /app &>> "$LOG_FILE"
+check_status "App Content Download"
 
-# Install application dependency and create the artifact.
+log_message "Build the Application..." | tee -a "$LOG_FILE"
 mvn clean package -f /app/pom.xml &>> "$LOG_FILE"
 mv /app/target/shipping-1.0.jar /app/shipping.jar &>> "$LOG_FILE"
+check_status "Build Application"
 
-# Create application service file
+log_message "Creating ${component} service file..." | tee -a "$LOG_FILE"
 cp shipping.service /etc/systemd/system/shipping.service &>> "$LOG_FILE"
+check_status "Service file creation"
 
-# Update the systemd daemon
-systemctl daemon-reload &>> "$LOG_FILE"
-# Start the application
-systemctl enable shipping &>> "$LOG_FILE"
-systemctl restart shipping &>> "$LOG_FILE"
-
-# Load the schema
+log_message "Load the schema..." | tee -a "$LOG_FILE"
 dnf install mysql -y
 mysql -h mysql.learntechnology.space -uroot -p"$1" < /app/db/schema.sql &>> "$LOG_FILE"
 mysql -h mysql.learntechnology.space -uroot -p"$1" < /app/db/app-user.sql &>> "$LOG_FILE"
 mysql -h mysql.learntechnology.space -uroot -p"$1" < /app/db/master-data.sql &>> "$LOG_FILE"
+check_status "Schema Load"
 
+log_message "Start the Application..." | tee -a "$LOG_FILE"
+systemctl daemon-reload &>> "$LOG_FILE"
+systemctl enable shipping &>> "$LOG_FILE"
 systemctl restart shipping &>> "$LOG_FILE"
+check_status "Service start"
 
 # Display the end banner
 print_end_banner
