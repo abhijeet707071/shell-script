@@ -15,6 +15,9 @@ fi
 # Display the start banner
 print_start_banner
 
+# Set hostname
+hostname
+
 dnf install python3 gcc python3-devel -y
 
 # Create application user
