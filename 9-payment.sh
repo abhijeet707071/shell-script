@@ -1,6 +1,6 @@
 source ./common.sh
 LOG_FILE="/tmp/roboshop.log"
-component="paymnent"
+component="payment"
 rabbitmq_user="roboshop"
 
 rabbitmq_user_pass="$1"
@@ -54,6 +54,6 @@ sed -i 's/rabbitmq_user_pass/${rabbitmq_user_pass}/' /etc/systemd/system/payment
 
 log_message "Start the Application ..." | tee -a "$LOG_FILE"
 systemctl daemon-reload &>> "$LOG_FILE"
-systemctl enable catalogue &>> "$LOG_FILE"
-systemctl restart catalogue &>> "$LOG_FILE"
+systemctl enable payment &>> "$LOG_FILE"
+systemctl restart payment &>> "$LOG_FILE"
 check_status "Service start"
