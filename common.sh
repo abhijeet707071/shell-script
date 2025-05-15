@@ -88,6 +88,15 @@ schema_load(){
   mongosh --host mongodb.learntechnology.space </app/db/master-data.js &>> "$LOG_FILE"
   check_status "Schema Load"
   fi
+
+  if [ ${schema_type} == "mysql" ]; then
+  log_message "Load the schema..." | tee -a "$LOG_FILE"
+  dnf install mysql -y &>> "$LOG_FILE"
+  mysql -h mysql.learntechnology.space -uroot -p"${mysql_root_password}" < /app/db/schema.sql &>> "$LOG_FILE"
+  mysql -h mysql.learntechnology.space -uroot -p"${mysql_root_password}" < /app/db/app-user.sql &>> "$LOG_FILE"
+  mysql -h mysql.learntechnology.space -uroot -p"${mysql_root_password}" < /app/db/master-data.sql &>> "$LOG_FILE"
+  check_status "Schema Load"
+  fi
 }
 
 nodejs(){
@@ -115,3 +124,24 @@ nodejs(){
 
 }
 
+shipping(){
+
+  log_message "Install Maven..." | tee -a "$LOG_FILE"
+  dnf install maven -y &>> "$LOG_FILE"
+  check_status "Maven installation"
+
+  # Call Application setup function to configure the application.
+  application-setup
+
+  log_message "Build the Application..." | tee -a "$LOG_FILE"
+  mvn clean package -f /app/pom.xml &>> "$LOG_FILE"
+  mv /app/target/${component}-1.0.jar /app/${component}.jar &>> "$LOG_FILE"
+  check_status "Build Application"
+
+  # Load the schema.
+  schema_load
+
+  # Call systemd setup function to start the application.
+  systemd_setup
+
+}
