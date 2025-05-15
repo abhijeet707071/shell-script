@@ -19,7 +19,7 @@ print_start_banner
 hostname
 
 log_message "Install Python..." | tee -a "$LOG_FILE"
-dnf install python3 gcc python3-devel -y
+dnf install python3 gcc python3-devel -y &>> "$LOG_FILE"
 check_status "Python installation"
 
 
@@ -53,18 +53,18 @@ check_status "App Content Download"
 
 
 log_message "Build the Application..." | tee -a "$LOG_FILE"
-pip3 install -r /app/requirements.txt
+pip3 install -r /app/requirements.txt &>> "$LOG_FILE"
 check_status "App Dependency Installation"
 
 
 log_message "Creating service file..." | tee -a "$LOG_FILE"
-cp service-files/payment.service /etc/systemd/system/payment.service
+cp service-files/payment.service /etc/systemd/system/payment.service &>> "$LOG_FILE"
 check_status "Service file creation"
 
 
 log_message "Update the service file..." | tee -a "$LOG_FILE"
-sed -i 's/rabbitmq_user/${rabbitmq_user}/' /etc/systemd/system/payment.service
-sed -i 's/rabbitmq_user_pass/${rabbitmq_user_pass}/' /etc/systemd/system/payment.service
+sed -i 's/rabbitmq_user/${rabbitmq_user}/' /etc/systemd/system/payment.service &>> "$LOG_FILE"
+sed -i 's/rabbitmq_user_pass/${rabbitmq_user_pass}/' /etc/systemd/system/payment.service &>> "$LOG_FILE"
 check_status "Service file update"
 
 
