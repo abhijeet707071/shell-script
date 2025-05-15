@@ -59,7 +59,7 @@ check_status "App Dependency Installation"
 
 
 log_message "Creating application service file..." | tee -a "$LOG_FILE"
-cp catalogue.service /etc/systemd/system/catalogue.service &>> "$LOG_FILE"
+cp configuration-files/catalogue.service /etc/systemd/system/catalogue.service &>> "$LOG_FILE"
 check_status "Service file creation"
 
 
@@ -71,7 +71,7 @@ check_status "Service start"
 
 
 log_message "Load the schema..." | tee -a "$LOG_FILE"
-cp mongo.repo /etc/yum.repos.d/mongo.repo &>> "$LOG_FILE"
+cp repo-files/mongo.repo /etc/yum.repos.d/mongo.repo &>> "$LOG_FILE"
 dnf install mongodb-mongosh -y &>> "$LOG_FILE"
 mongosh --host mongodb.learntechnology.space </app/db/master-data.js &>> "$LOG_FILE"
 check_status "Schema Load"

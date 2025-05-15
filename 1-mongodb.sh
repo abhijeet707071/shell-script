@@ -14,7 +14,7 @@ hostname
 
 # Install and Configure Nginx
 log_message "Configuring MongoDB repository..." | tee -a "$LOG_FILE"
-cp mongo.repo /etc/yum.repos.d/mongo.repo &>> "$LOG_FILE"
+cp repo-files/mongo.repo /etc/yum.repos.d/mongo.repo &>> "$LOG_FILE"
 check_status "Repo Configuration"
 
 # Install MongoDB
