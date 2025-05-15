@@ -63,8 +63,8 @@ check_status "Service file creation"
 
 
 log_message "Update the service file..." | tee -a "$LOG_FILE"
-sed -i 's/rabbitmq_user/${rabbitmq_user}/' /etc/systemd/system/payment.service &>> "$LOG_FILE"
-sed -i 's/rabbitmq_user_pass/${rabbitmq_user_pass}/' /etc/systemd/system/payment.service &>> "$LOG_FILE"
+sed -i 's/rabbitmq_user/"${rabbitmq_user}"/' /etc/systemd/system/payment.service &>> "$LOG_FILE"
+sed -i 's/rabbitmq_user_pass/"${rabbitmq_user_pass}"/' /etc/systemd/system/payment.service &>> "$LOG_FILE"
 check_status "Service file update"
 
 
