@@ -57,7 +57,7 @@ cp shipping.service /etc/systemd/system/shipping.service &>> "$LOG_FILE"
 check_status "Service file creation"
 
 log_message "Load the schema..." | tee -a "$LOG_FILE"
-dnf install mysql -y
+dnf install mysql -y &>> "$LOG_FILE"
 mysql -h mysql.learntechnology.space -uroot -p"$1" < /app/db/schema.sql &>> "$LOG_FILE"
 mysql -h mysql.learntechnology.space -uroot -p"$1" < /app/db/app-user.sql &>> "$LOG_FILE"
 mysql -h mysql.learntechnology.space -uroot -p"$1" < /app/db/master-data.sql &>> "$LOG_FILE"
