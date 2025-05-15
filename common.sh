@@ -145,3 +145,26 @@ shipping(){
   systemd_setup
 
 }
+
+payment(){
+  log_message "Install Python..." | tee -a "$LOG_FILE"
+  dnf install python3 gcc python3-devel -y &>> "$LOG_FILE"
+  check_status "Python installation"
+
+  # Call Application setup function to configure the application.
+  application-setup
+
+  # Build the Application.
+  log_message "Build the Application..." | tee -a "$LOG_FILE"
+  pip3 install -r /app/requirements.txt &>> "$LOG_FILE"
+  check_status "App Dependency Installation"
+
+  # Update the service file with the RabbitMQ credentials.
+  log_message "Update the service file..." | tee -a "$LOG_FILE"
+  sed -i "s/AMQP_USER=.*/AMQP_USER=${rabbitmq_user_name}/" /etc/systemd/system/payment.service &>> "$LOG_FILE"
+  sed -i "s/AMQP_PASS=.*/AMQP_PASS=${rabbitmq_user_pass}/" /etc/systemd/system/payment.service &>> "$LOG_FILE"
+  check_status "Service file update"
+
+  # Call systemd setup function to start the application.
+  systemd_setup
+}
