@@ -1,6 +1,13 @@
 source ./common.sh
 LOG_FILE="/tmp/roboshop.log"
 component="paymnent"
+rabbitmq_user="roboshop"
+
+rabbitmq_user_pass="$1"
+if [ -z "$rabbitmq_user_pass" ]; then
+  echo -e "\n\e[1;31mPlease provide the RabbitMQ user password as an 1st argument.\e[0m"
+  exit 1
+fi
 
 # Clear log file
 > "$LOG_FILE"
