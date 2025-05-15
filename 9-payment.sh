@@ -1,7 +1,7 @@
 source ./common.sh
 LOG_FILE="/tmp/roboshop.log"
 component="payment"
-rabbitmq_user="roboshop"
+rabbitmq_user_name="roboshop"
 
 rabbitmq_user_pass="$1"
 if [ -z "$rabbitmq_user_pass" ]; then
@@ -63,7 +63,7 @@ check_status "Service file creation"
 
 
 log_message "Update the service file..." | tee -a "$LOG_FILE"
-sed -i "s/AMQP_USER=.*/AMQP_USER=${rabbitmq_user}/" /etc/systemd/system/payment.service &>> "$LOG_FILE"
+sed -i "s/AMQP_USER=.*/AMQP_USER=${rabbitmq_user_name}/" /etc/systemd/system/payment.service &>> "$LOG_FILE"
 sed -i "s/AMQP_PASS=.*/AMQP_PASS=${rabbitmq_user_pass}/" /etc/systemd/system/payment.service &>> "$LOG_FILE"
 
 check_status "Service file update"
